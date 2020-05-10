@@ -11,7 +11,7 @@ write-host "Pushed to github"
 
 write-host "Building artifact..."
 
-.\build.ps1
+.\find-my-workout-api\WhatsTheWorkout\build.ps1
 
 write-host "Artifact built"
 
