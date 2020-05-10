@@ -1,2 +1,4 @@
 .vscode
 find-my-workout-api/WhatsTheWorkout/bin
+find-my-workout-api/WhatsTheWorkout/.serverless
+find-my-workout-api/WhatsTheWorkout/obj
