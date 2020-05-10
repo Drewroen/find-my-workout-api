@@ -12,9 +12,9 @@ namespace WhatsTheWorkout.Controllers
     {
         // GET api/values
         [HttpGet]
-        public ActionResult<IEnumerable<string>> Get()
+        public ActionResult<string> Get()
         {
-            return new string[] { "value1", "value2" };
+            return "This thing is working and deploying, big W";
         }
 
         // GET api/values/5
