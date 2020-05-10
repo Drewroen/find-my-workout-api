@@ -11,7 +11,9 @@ write-host "Pushed to github"
 
 write-host "Building artifact..."
 
-.\find-my-workout-api\WhatsTheWorkout\build.ps1
+cd .\find-my-workout-api\WhatsTheWorkout
+
+.\build.ps1
 
 write-host "Artifact built"
 
@@ -20,5 +22,3 @@ write-host "Deploying using serverless..."
 serverless deploy -v
 
 write-host "Deployed using serverless"
-
-cd .\find-my-workout-api\WhatsTheWorkout
