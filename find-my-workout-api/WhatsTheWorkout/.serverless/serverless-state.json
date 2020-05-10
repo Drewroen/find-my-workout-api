@@ -160,7 +160,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/whatstheworkoutservice/dev/1589119039722-2020-05-10T13:57:19.722Z/bin/release/netcoreapp2.1/deploy-package.zip"
+                "S3Key": "serverless/whatstheworkoutservice/dev/1589119751251-2020-05-10T14:09:11.251Z/bin/release/netcoreapp2.1/deploy-package.zip"
               },
               "FunctionName": "whatstheworkoutservice-dev-api",
               "Handler": "WhatsTheWorkout::WhatsTheWorkout.LambdaEntryPoint::FunctionHandlerAsync",
@@ -179,14 +179,14 @@
               "IamRoleLambdaExecution"
             ]
           },
-          "ApiLambdaVersionYykVO9vcwpGiGmTtSw18MLxIphdH1Ts9Lj6ZCfmj8Ss": {
+          "ApiLambdaVersionsZvA8fNheoEUTeUnWXQcOd7p1DTTwKnRsr0RbkiLuV4": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ApiLambdaFunction"
               },
-              "CodeSha256": "CYTh9js27BmoXGBAT4ZlvecAuG5lcLq16ClLO2YuRJc="
+              "CodeSha256": "DLS/gBJM4jVUMo79aT6TALlc5hnjqU9Cdz0Vt2lT3zo="
             }
           },
           "ApiGatewayRestApi": {
@@ -259,7 +259,7 @@
               "MethodResponses": []
             }
           },
-          "ApiGatewayDeployment1589119038842": {
+          "ApiGatewayDeployment1589119750387": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -318,7 +318,7 @@
           "ApiLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ApiLambdaVersionYykVO9vcwpGiGmTtSw18MLxIphdH1Ts9Lj6ZCfmj8Ss"
+              "Ref": "ApiLambdaVersionsZvA8fNheoEUTeUnWXQcOd7p1DTTwKnRsr0RbkiLuV4"
             }
           },
           "ServiceEndpoint": {
@@ -434,7 +434,7 @@
         "timeout": 6,
         "runtime": "dotnetcore2.1",
         "vpc": {},
-        "versionLogicalId": "ApiLambdaVersionYykVO9vcwpGiGmTtSw18MLxIphdH1Ts9Lj6ZCfmj8Ss"
+        "versionLogicalId": "ApiLambdaVersionsZvA8fNheoEUTeUnWXQcOd7p1DTTwKnRsr0RbkiLuV4"
       }
     },
     "serviceFilename": "serverless.yml",
@@ -442,7 +442,7 @@
     "isDashboardMonitoringPreconfigured": false
   },
   "package": {
-    "artifactDirectoryName": "serverless/whatstheworkoutservice/dev/1589119039722-2020-05-10T13:57:19.722Z",
+    "artifactDirectoryName": "serverless/whatstheworkoutservice/dev/1589119751251-2020-05-10T14:09:11.251Z",
     "artifact": "bin/release/netcoreapp2.1/deploy-package.zip"
   }
 }
