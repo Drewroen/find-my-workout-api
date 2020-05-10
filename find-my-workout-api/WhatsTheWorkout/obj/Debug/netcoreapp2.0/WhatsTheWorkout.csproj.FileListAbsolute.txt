@@ -1,0 +1,11 @@
+C:\Users\Drew Roen\Documents\Programming\Workouts App\find-my-workout-api\WhatsTheWorkout\bin\Debug\netcoreapp2.0\WhatsTheWorkout.deps.json
+C:\Users\Drew Roen\Documents\Programming\Workouts App\find-my-workout-api\WhatsTheWorkout\bin\Debug\netcoreapp2.0\WhatsTheWorkout.runtimeconfig.json
+C:\Users\Drew Roen\Documents\Programming\Workouts App\find-my-workout-api\WhatsTheWorkout\bin\Debug\netcoreapp2.0\WhatsTheWorkout.runtimeconfig.dev.json
+C:\Users\Drew Roen\Documents\Programming\Workouts App\find-my-workout-api\WhatsTheWorkout\bin\Debug\netcoreapp2.0\WhatsTheWorkout.dll
+C:\Users\Drew Roen\Documents\Programming\Workouts App\find-my-workout-api\WhatsTheWorkout\bin\Debug\netcoreapp2.0\WhatsTheWorkout.pdb
+C:\Users\Drew Roen\Documents\Programming\Workouts App\find-my-workout-api\WhatsTheWorkout\obj\Debug\netcoreapp2.0\WhatsTheWorkout.csprojAssemblyReference.cache
+C:\Users\Drew Roen\Documents\Programming\Workouts App\find-my-workout-api\WhatsTheWorkout\obj\Debug\netcoreapp2.0\WhatsTheWorkout.csproj.CoreCompileInputs.cache
+C:\Users\Drew Roen\Documents\Programming\Workouts App\find-my-workout-api\WhatsTheWorkout\obj\Debug\netcoreapp2.0\WhatsTheWorkout.AssemblyInfoInputs.cache
+C:\Users\Drew Roen\Documents\Programming\Workouts App\find-my-workout-api\WhatsTheWorkout\obj\Debug\netcoreapp2.0\WhatsTheWorkout.AssemblyInfo.cs
+C:\Users\Drew Roen\Documents\Programming\Workouts App\find-my-workout-api\WhatsTheWorkout\obj\Debug\netcoreapp2.0\WhatsTheWorkout.dll
+C:\Users\Drew Roen\Documents\Programming\Workouts App\find-my-workout-api\WhatsTheWorkout\obj\Debug\netcoreapp2.0\WhatsTheWorkout.pdb
