@@ -1,16 +1,35 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+using Amazon.DynamoDBv2;
+using Amazon.DynamoDBv2.Model;
+using Amazon.Runtime;
+using Amazon;
+using WhatsTheWorkout.Models;
 
 namespace WhatsTheWorkout.Services
 {
     public class WorkoutService : IWorkoutService
     {
-        public void PostWorkout()
+        private readonly IAmazonDynamoDB _dynamoClient;
+        private readonly string tableName = "Workout";
+        public WorkoutService()
         {
+            _dynamoClient = new AmazonDynamoDBClient(FallbackCredentialsFactory.GetCredentials(), RegionEndpoint.USEast2);
+        }
 
+        public void PostWorkout(PostWorkoutRequest workout)
+        {
+            Dictionary<string, AttributeValue> temp = new Dictionary<string, AttributeValue>();
+            temp.Add("UserId", new AttributeValue { S = Guid.NewGuid().ToString() });
+            temp.Add("Name", new AttributeValue { S = workout.Name });
+
+            var req = new PutItemRequest
+            {
+                TableName = tableName,
+                Item = temp,
+            };
+
+            _dynamoClient.PutItemAsync(req);
         }
 
         public string GetWorkouts()

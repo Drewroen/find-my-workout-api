@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using WhatsTheWorkout.Services;
+using WhatsTheWorkout.Models;
 
 namespace WhatsTheWorkout.Controllers
 {
@@ -22,7 +19,15 @@ namespace WhatsTheWorkout.Controllers
         [HttpGet]
         public ActionResult<string> GetWorkouts()
         {
-            return _workoutService.GetWorkouts();
+            return Ok(_workoutService.GetWorkouts());
+        }
+
+        // POST api/values
+        [HttpPost]
+        public ActionResult PostWorkout([FromBody] PostWorkoutRequest workout)
+        {
+            _workoutService.PostWorkout(workout);
+            return Ok();
         }
     }
 }

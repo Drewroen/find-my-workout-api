@@ -1,14 +1,11 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
+using WhatsTheWorkout.Models;
 
 namespace WhatsTheWorkout.Services
 {
     public interface IWorkoutService
     {
-        void PostWorkout();
+        void PostWorkout(PostWorkoutRequest workout);
         string GetWorkouts();
         string GetWorkout(Guid workoutId);
         string UpdateWorkout(Guid workoutId);
