@@ -29,7 +29,9 @@ namespace WhatsTheWorkout.Services
                 Item = temp,
             };
 
-            _dynamoClient.PutItemAsync(req);
+            PutItemResponse resp = _dynamoClient.PutItemAsync(req).Result;
+
+            Console.WriteLine(resp.HttpStatusCode);
         }
 
         public string GetWorkouts()
