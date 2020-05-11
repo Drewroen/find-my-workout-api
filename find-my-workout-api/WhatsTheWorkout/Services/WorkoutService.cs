@@ -5,6 +5,8 @@ using Amazon.DynamoDBv2.Model;
 using Amazon.Runtime;
 using Amazon;
 using WhatsTheWorkout.Models;
+using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace WhatsTheWorkout.Services
 {
@@ -17,26 +19,54 @@ namespace WhatsTheWorkout.Services
             _dynamoClient = new AmazonDynamoDBClient(FallbackCredentialsFactory.GetCredentials(), RegionEndpoint.USEast2);
         }
 
-        public void PostWorkout(PostWorkoutRequest workout)
+        public PutItemResponse PostWorkout(PostWorkoutRequest workoutRequest, string userId)
         {
-            Dictionary<string, AttributeValue> temp = new Dictionary<string, AttributeValue>();
-            temp.Add("UserId", new AttributeValue { S = Guid.NewGuid().ToString() });
-            temp.Add("Name", new AttributeValue { S = "TEST" });
+            PutItemRequest request = GeneratePutItemRequest(workoutRequest, userId);
 
-            var req = new PutItemRequest
-            {
-                TableName = tableName,
-                Item = temp,
-            };
-
-            PutItemResponse resp = _dynamoClient.PutItemAsync(req).Result;
-
-            Console.WriteLine(resp.HttpStatusCode);
+            return _dynamoClient.PutItemAsync(request).Result;
         }
 
-        public string GetWorkouts()
+        private PutItemRequest GeneratePutItemRequest(PostWorkoutRequest workoutRequest, string userId)
         {
-            return "Workouts obtained";
+            List<AttributeValue> workoutStepsAttribute = new List<AttributeValue>();
+            foreach(WorkoutStep s in workoutRequest.Steps)
+            {
+                workoutStepsAttribute.Add(new AttributeValue { S = JsonConvert.SerializeObject(s) });
+            }
+            Dictionary<string, AttributeValue> dynamoWorkout = new Dictionary<string, AttributeValue>();
+            dynamoWorkout.Add("WorkoutId", new AttributeValue { S = Guid.NewGuid().ToString() });
+            dynamoWorkout.Add("UserId", new AttributeValue { S = userId });
+            dynamoWorkout.Add("Name", new AttributeValue { S = workoutRequest.Name });
+            dynamoWorkout.Add("Description", new AttributeValue { S = workoutRequest.Description });
+            dynamoWorkout.Add("Steps", new AttributeValue { L = workoutStepsAttribute });
+
+            return new PutItemRequest
+            {
+                TableName = tableName,
+                Item = dynamoWorkout,
+            };
+        }
+
+        public async Task<GetWorkoutResponse[]> GetWorkouts()
+        {
+            List<GetWorkoutResponse> workouts = new List<GetWorkoutResponse>();
+            var resp = await _dynamoClient.ScanAsync(tableName, new List<string>{ "WorkoutId", "Name", "Description", "Steps" });
+            foreach(Dictionary<string, AttributeValue> dynamoWorkout in resp.Items)
+            {
+                GetWorkoutResponse workout = new GetWorkoutResponse();
+                workout.WorkoutId = Guid.Parse(dynamoWorkout.GetValueOrDefault("WorkoutId").S);
+                workout.Name = dynamoWorkout.GetValueOrDefault("Name").S;
+                workout.Description = dynamoWorkout.GetValueOrDefault("Description").S;
+                List<WorkoutStep> steps = new List<WorkoutStep>();
+                foreach(AttributeValue step in dynamoWorkout.GetValueOrDefault("Steps").L)
+                {
+                    steps.Add(JsonConvert.DeserializeObject<WorkoutStep>(step.S));
+                }
+                workout.Steps = steps.ToArray();
+                workouts.Add(workout);
+            }
+            
+            return workouts.ToArray();
         }
 
         public string GetWorkout(Guid workoutId)
