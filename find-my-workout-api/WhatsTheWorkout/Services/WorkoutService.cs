@@ -21,7 +21,7 @@ namespace WhatsTheWorkout.Services
         {
             Dictionary<string, AttributeValue> temp = new Dictionary<string, AttributeValue>();
             temp.Add("UserId", new AttributeValue { S = Guid.NewGuid().ToString() });
-            temp.Add("Name", new AttributeValue { S = workout.Name });
+            temp.Add("Name", new AttributeValue { S = "TEST" });
 
             var req = new PutItemRequest
             {
