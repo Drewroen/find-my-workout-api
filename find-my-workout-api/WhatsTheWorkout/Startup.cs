@@ -12,6 +12,7 @@ namespace WhatsTheWorkout
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -24,6 +25,20 @@ namespace WhatsTheWorkout
         {
             services.AddMvc();
             services.AddSingleton<IWorkoutService, WorkoutService>();
+
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                builder =>
+                                {
+                                    builder.WithOrigins("http://www.whatstheworkout.com",
+                                                        "http://whatstheworkout.com",
+                                                        "https://www.whatstheworkout.com",
+                                                        "https://whatstheworkout.com",
+                                                        "http://localhost:4200");
+                                });
+            });
+
 
 
             string domain = $"https://{Configuration["Auth0:Domain"]}/";
@@ -45,6 +60,7 @@ namespace WhatsTheWorkout
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseAuthentication();
             app.UseMvc();
         }
