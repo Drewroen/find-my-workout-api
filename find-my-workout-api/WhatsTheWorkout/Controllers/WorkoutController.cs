@@ -4,6 +4,7 @@ using WhatsTheWorkout.Models;
 using Microsoft.AspNetCore.Authorization;
 using System.Linq;
 using System;
+using System.Web.Http;
 
 namespace WhatsTheWorkout.Controllers
 {
