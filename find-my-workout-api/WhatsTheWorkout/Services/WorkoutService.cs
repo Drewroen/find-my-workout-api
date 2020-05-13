@@ -109,11 +109,6 @@ namespace WhatsTheWorkout.Services
                 return workout;
         }
 
-        public string GetWorkout(Guid workoutId)
-        {
-            return "Workout obtained";
-        }
-
         public UpdateItemResponse UpdateWorkout(Guid workoutId, PostWorkoutRequest workout, string userId)
         {
             Dictionary<string, AttributeValue> key = new Dictionary<string, AttributeValue>
@@ -183,5 +178,37 @@ namespace WhatsTheWorkout.Services
             return _dynamoClient.DeleteItemAsync(request).Result;
         }
 
+        public GetWorkoutResponse GetWorkout(Guid workoutId, string userId)
+        {
+            Dictionary<string, AttributeValue> key = new Dictionary<string, AttributeValue>
+            {
+                { "WorkoutId", new AttributeValue { S = workoutId.ToString() } },
+                { "UserId", new AttributeValue { S = userId } }
+            };
+
+            GetItemRequest request = new GetItemRequest
+            {
+                TableName = tableName,
+                Key = key
+            };
+
+            var response = _dynamoClient.GetItemAsync(request).Result;
+
+            Dictionary<string, AttributeValue> workout = response.Item;
+
+            List<WorkoutStep> steps = new List<WorkoutStep>();
+            foreach(AttributeValue step in workout.GetValueOrDefault("Steps").L)
+            {
+                steps.Add(JsonConvert.DeserializeObject<WorkoutStep>(step.S));
+            }
+
+            return new GetWorkoutResponse
+            {
+                WorkoutId = Guid.Parse(workout.GetValueOrDefault("WorkoutId").S),
+                Name = workout.GetValueOrDefault("Name").S,
+                Description = workout.GetValueOrDefault("Description").S,
+                Steps = steps.ToArray()
+            };
+        }
     }
 }

@@ -9,8 +9,8 @@ namespace WhatsTheWorkout.Services
     {
         PutItemResponse PostWorkout(PostWorkoutRequest workout, string userId);
         Task<GetWorkoutResponse[]> GetWorkouts(bool allWorkouts, string userId);
-        string GetWorkout(Guid workoutId);
         UpdateItemResponse UpdateWorkout(Guid workoutId, PostWorkoutRequest workout, string userId);
         DeleteItemResponse DeleteWorkout(Guid workoutId, string userId);
+        GetWorkoutResponse GetWorkout(Guid workoutId, string userId);
     }
 }

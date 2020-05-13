@@ -85,5 +85,21 @@ namespace WhatsTheWorkout.Controllers
                 return StatusCode(500);
             }
         }
+
+        [HttpGet]
+        [Authorize]
+        [Route("{workoutId}")]
+        public ActionResult GetWorkout(Guid workoutId)
+        {
+            try
+            {
+                return Ok(_workoutService.GetWorkout(workoutId, getUserId()));
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return StatusCode(500);
+            }
+        }
     }
 }
